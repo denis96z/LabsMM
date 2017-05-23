@@ -67,3 +67,14 @@ class LinearInterpolation3D : Interpolation3D
         throw new NotImplementedException();
     }
 }
+
+class LinearLogInterpolation3D : Interpolation3D
+{
+    public LinearLogInterpolation3D(double[] x,
+        double[] y, double[,] z) : base(x, y, z) { }
+
+    public override double FindValue(double x, double y)
+    {
+        throw new NotImplementedException();
+    }
+}
