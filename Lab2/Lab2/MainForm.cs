@@ -18,9 +18,10 @@ namespace Lab2
 
             DiffEquationSys sys = new RungeKuttaDiffEquationSys(new DiffEquationSys.SeveralArgFun[]
             {
-                (x, y) => x
+                (x, y) => x,
+                (x, y) => y[1]
             });
-            DiffEquationSolution[] solutions = sys.FindSolution(0, 1, new double[] { 1 }, 10);
+            DiffEquationSolution[] solutions = sys.FindSolution(0, 1, new double[] { 1, 1 }, 100);
         }
     }
 }

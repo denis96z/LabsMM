@@ -71,7 +71,7 @@ class RungeKuttaDiffEquationSys : DiffEquationSys
 
         double x = a;
         double h = (b - a) / n;
-        for (int i = 1; i <= n; i++)
+        for (int i = 1; i <= n; i++, x += h)
         {
             double[,] k = new double[4, f.Length];
 
@@ -91,7 +91,7 @@ class RungeKuttaDiffEquationSys : DiffEquationSys
             {
                 for (int j = 0; j < f.Length; j++)
                 {
-                    y[j] = solutions[j].Y[i - 1] + 0.5*k[index, j];
+                    y[j] = solutions[j].Y[i - 1] + 0.5*k[index-1, j];
                 }
                 for (int j = 0; j < f.Length; j++)
                 {
@@ -102,12 +102,7 @@ class RungeKuttaDiffEquationSys : DiffEquationSys
             // Приращение функции.
             for (int j = 0; j < f.Length; j++)
             {
-                y[j] = (1 / 6) * (k[0, j] + 2*k[1, j] + 2*k[2, j] + k[3, j]);
-            }
-
-            // Расчет следующего значения y.
-            for (int j = 0; j < f.Length; j++)
-            {
+                y[j] = 0.1667 * (k[0, j] + 2*k[1, j] + 2*k[2, j] + k[3, j]);
                 solutions[j].Y[i] = solutions[j].Y[i - 1] + y[j];
             }
         }
