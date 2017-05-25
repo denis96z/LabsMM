@@ -16,7 +16,7 @@ namespace Lab2
         {
             InitializeComponent();
 
-            Interpolation2D itp = new LinearInterpolation2D(new double[] { 0, 2, 3, 4, 5 },
+            Interpolation itp = new LinearInterpolation(new double[] { 0, 2, 3, 4, 5 },
                 new double[] { 1, 1, 0, 1, 0 });
             double y = itp.FindValue(-1);
             y = itp.FindValue(1);

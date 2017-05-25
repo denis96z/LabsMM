@@ -1,8 +1,11 @@
 ﻿using System;
 
-abstract class Interpolation2D
+/// <summary>
+/// Одномерная интерполяция.
+/// </summary>
+abstract class Interpolation
 {
-    public Interpolation2D(double[] x, double[] y)
+    public Interpolation(double[] x, double[] y)
     {
         this.xValues = x;
         this.yValues = y;
@@ -15,9 +18,12 @@ abstract class Interpolation2D
     protected readonly int NODES_COUNT = 0;
 }
 
-class LinearInterpolation2D : Interpolation2D
+/// <summary>
+/// Одномерная линейная интерполяция.
+/// </summary>
+class LinearInterpolation : Interpolation
 {
-    public LinearInterpolation2D(double[] x, double[] y) : base(x, y) { }
+    public LinearInterpolation(double[] x, double[] y) : base(x, y) { }
 
     public override double FindValue(double x)
     {
@@ -42,9 +48,12 @@ class LinearInterpolation2D : Interpolation2D
     }
 }
 
-abstract class Interpolation3D
+/// <summary>
+/// Двумерная интерполяция.
+/// </summary>
+abstract class Interpolation2
 {
-    public Interpolation3D(double[] x, double[] y, double[,] z)
+    public Interpolation2(double[] x, double[] y, double[,] z)
     {
         this.xValues = x;
         this.yValues = y;
@@ -57,9 +66,12 @@ abstract class Interpolation3D
     protected double[,] zValues = null;
 }
 
-class LinearInterpolation3D : Interpolation3D
+/// <summary>
+/// Двумерная линейная интерполяция.
+/// </summary>
+class LinearInterpolation2 : Interpolation2
 {
-    public LinearInterpolation3D(double[] x,
+    public LinearInterpolation2(double[] x,
         double[] y, double[,] z) : base(x, y, z) { }
 
     public override double FindValue(double x, double y)
@@ -68,9 +80,12 @@ class LinearInterpolation3D : Interpolation3D
     }
 }
 
-class LinearLogInterpolation3D : Interpolation3D
+/// <summary>
+/// Двумерная линейно-логарифмическая интерполяция.
+/// </summary>
+class LinearLogInterpolation2 : Interpolation2
 {
-    public LinearLogInterpolation3D(double[] x,
+    public LinearLogInterpolation2(double[] x,
         double[] y, double[,] z) : base(x, y, z) { }
 
     public override double FindValue(double x, double y)

@@ -41,10 +41,10 @@ class Task
     {
         double T(double r)
         {
-            Interpolation2D itp = new LinearInterpolation2D(t0Table.I, t0Table.T0);
+            Interpolation itp = new LinearInterpolation(t0Table.I, t0Table.T0);
             double t0 = itp.FindValue(I);
 
-            itp = new LinearInterpolation2D(mTable.I, mTable.M);
+            itp = new LinearInterpolation(mTable.I, mTable.M);
             double m = itp.FindValue(I);
 
             return (Tw - t0) * Math.Pow((r / R), m) + t0;
@@ -54,7 +54,7 @@ class Task
         {
             Integral itgN = new SimpsonIntegral(r =>
             {
-                Interpolation3D ditp = new LinearInterpolation3D(nTable.T, nTable.P, nTable.N);
+                Interpolation2 ditp = new LinearInterpolation2(nTable.T, nTable.P, nTable.N);
                 double n = ditp.FindValue(T(r), p);
                 return n * r;
             });
@@ -73,7 +73,7 @@ class Task
 
         Integral itgSigma = new SimpsonIntegral(r =>
         {
-            Interpolation3D ditp = new LinearInterpolation3D(sigmaTable.T, sigmaTable.P, sigmaTable.Sigma);
+            Interpolation2 ditp = new LinearInterpolation2(sigmaTable.T, sigmaTable.P, sigmaTable.Sigma);
             double n = ditp.FindValue(T(r), pValue);
             return n * r;
         });
