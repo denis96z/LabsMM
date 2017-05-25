@@ -29,6 +29,7 @@ class Task
         nTable = manager.NTable;
         sigmaTable = manager.SigmaTable;
 
+        //!!! Вроде силу тока по модулю брать надо (сила тока здесь y[0]), после тестирования будет понятно.
         DiffEquationSys deSys = new RungeKuttaDiffEquationSys(new DiffEquationSys.SeveralArgFun[]
         {
                 (x, y) => ((y[1] - (Rk + Rp(y[0]))*y[0]) / Lk),

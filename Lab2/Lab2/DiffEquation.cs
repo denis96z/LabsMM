@@ -7,6 +7,32 @@ struct DiffEquationSolution
 {
     public double[] X;
     public double[] Y;
+    public int N;
+
+    public DiffEquationSolution(int n)
+    {
+        if (n > 0)
+        {
+            X = new double[n + 1];
+            Y = new double[n + 1];
+            N = n;
+        }
+        else
+        {
+            throw new ArgumentException("n");
+        }
+    }
+
+    public DiffEquationSolution(double a,
+        double b, int n) : this(n)
+    {
+        X[0] = a;
+        double h = (b - a) / n;
+        for (int i = 1; i <= n; i++)
+        {
+            X[i] = X[i - 1] + h;
+        }
+    }
 }
 
 /// <summary>
@@ -21,7 +47,7 @@ abstract class DiffEquationSys
         this.f = f;
     }
 
-    public abstract DiffEquationSolution[] FindSolution(double a, double b, double[] y0, double h);
+    public abstract DiffEquationSolution[] FindSolution(double a, double b, double[] y0, int n);
 
     protected SeveralArgFun[] f = null;
 }
@@ -33,9 +59,60 @@ class RungeKuttaDiffEquationSys : DiffEquationSys
 {
     public RungeKuttaDiffEquationSys(SeveralArgFun[] f) : base(f) { }
 
-    public override DiffEquationSolution[] FindSolution(double a, double b, double[] y0, double h)
+    public override DiffEquationSolution[] FindSolution(double a, double b, double[] y0, int n)
     {
-        throw new NotImplementedException();
+        DiffEquationSolution[] solutions = new DiffEquationSolution[f.Length];
+
+        for (int i = 0; i < f.Length; i++)
+        {
+            solutions[i] = new DiffEquationSolution(a, b, n);
+            solutions[i].Y[0] = y0[i];
+        }
+
+        double x = a;
+        double h = (b - a) / n;
+        for (int i = 1; i <= n; i++)
+        {
+            double[,] k = new double[4, f.Length];
+
+            // Вычисление K0.
+            double[] y = new double[f.Length];
+            for (int j = 0; j < f.Length; j++)
+            {
+                y[j] = solutions[j].Y[i - 1];
+            }
+            for (int j = 0; j < f.Length; j++)
+            {
+                k[0, j] = h * f[j](x, y);
+            }
+
+            // Вычисление Kindex, index = 1,...,3
+            for (int index = 1; index <= 3; index++)
+            {
+                for (int j = 0; j < f.Length; j++)
+                {
+                    y[j] = solutions[j].Y[i - 1] + 0.5*k[index, j];
+                }
+                for (int j = 0; j < f.Length; j++)
+                {
+                    k[index, j] = h * f[j](x + 0.5*h, y);
+                }
+            }
+
+            // Приращение функции.
+            for (int j = 0; j < f.Length; j++)
+            {
+                y[j] = (1 / 6) * (k[0, j] + 2*k[1, j] + 2*k[2, j] + k[3, j]);
+            }
+
+            // Расчет следующего значения y.
+            for (int j = 0; j < f.Length; j++)
+            {
+                solutions[j].Y[i] = solutions[j].Y[i - 1] + y[j];
+            }
+        }
+
+        return solutions;
     }
 }
 
@@ -46,7 +123,7 @@ class ImplTrapDiffEquationSys : DiffEquationSys
 {
     public ImplTrapDiffEquationSys(SeveralArgFun[] f) : base(f) { }
 
-    public override DiffEquationSolution[] FindSolution(double a, double b, double[] y0, double h)
+    public override DiffEquationSolution[] FindSolution(double a, double b, double[] y0, int n)
     {
         throw new NotImplementedException();
     }
