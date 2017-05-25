@@ -16,14 +16,11 @@ namespace Lab2
         {
             InitializeComponent();
 
-            Interpolation itp = new LinearInterpolation(new double[] { 0, 2, 3, 4, 5 },
-                new double[] { 1, 1, 0, 1, 0 });
-            double y = itp.FindValue(-1);
-            y = itp.FindValue(1);
-            y = itp.FindValue(2);
-            y = itp.FindValue(2.5);
-            y = itp.FindValue(4.5);
-            y = itp.FindValue(10);
+            DiffEquationSys sys = new RungeKuttaDiffEquationSys(new DiffEquationSys.SeveralArgFun[]
+            {
+                (x, y) => x
+            });
+            DiffEquationSolution[] solutions = sys.FindSolution(0, 1, new double[] { 1 }, 10);
         }
     }
 }
