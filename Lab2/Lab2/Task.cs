@@ -37,7 +37,7 @@ class Task
         I0 = I0;
     }
 
-    public void Solve()
+    public DiffEquationSolution[] Solve()
     {
         TablesManager manager = new TablesManager();
         t0Table = manager.T0Table;
@@ -50,7 +50,7 @@ class Task
                 (x, y) => ((y[1] - (Rk + Rp(y[0]))*y[0]) / Lk),
                 (x, y) => (-y[0] / Ck)
         });
-        var solution = deSys.FindSolution(0, 0.0006, new double[] { I0, Uc0 }, 50);
+        return deSys.FindSolution(0, 0.0006, new double[] { I0, Uc0 }, 50);
     }
 
     private double Rp(double I)
@@ -78,7 +78,7 @@ class Task
                 return n * r;
             });
 
-            return (2 / R * R) * itgN.FindValue(0, R, INTEGRAL_NODES) - (P0 * 7242 / Ts);
+            return (2 / Math.Pow(R, 2)) * itgN.FindValue(0, R, INTEGRAL_NODES) - (P0 * 7242 / Ts);
         }
 
         Dichotomy dch = new Dichotomy(f);

@@ -16,8 +16,8 @@ namespace Lab2
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 double rk = double.Parse(tbRk.Text);
                 double lk = double.Parse(tbLk.Text);
                 double ck = double.Parse(tbCk.Text);
@@ -30,12 +30,15 @@ namespace Lab2
                 double i0 = double.Parse(tbI0.Text);
 
                 Task task = new Task(rk, lk, ck, r, p0, ts, tw, le, uc0, i0);
-                task.Solve();
-            //}
-            //catch (Exception exception)
-            //{
-            //    MessageBox.Show(exception.Message);
-            //}
+                var solutions = task.Solve();
+
+                Graph graph = new Graph(zedGraph);
+                graph.DrawGraph(solutions[0], solutions[1]);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }
