@@ -1,5 +1,13 @@
 ﻿using System;
 
+struct TaskSolution
+{
+    public DiffEquationSolution I;
+    public DiffEquationSolution Uc;
+    public DiffEquationSolution Rp;
+    public DiffEquationSolution Ucp;
+}
+
 class Task
 {
     public double Rk { get; set; }
@@ -37,7 +45,7 @@ class Task
         I0 = I0;
     }
 
-    public DiffEquationSolution[] Solve()
+    public TaskSolution Solve(double a, double b, int n)
     {
         TablesManager manager = new TablesManager();
         t0Table = manager.T0Table;
@@ -50,7 +58,26 @@ class Task
                 (x, y) => ((y[1] - (Rk + Rp(y[0]))*y[0]) / Lk),
                 (x, y) => (-y[0] / Ck)
         });
-        return deSys.FindSolution(0, 0.0006, new double[] { I0, Uc0 }, 50);
+
+        DiffEquationSolution[] sysSolution = deSys.FindSolution(a, b, new double[] { I0, Uc0 }, n);
+        DiffEquationSolution rpSolution = new DiffEquationSolution(a, b, n);
+        for (int i = 0; i <= n; i++)
+        {
+            rpSolution.Y[i] = Rp(sysSolution[0].Y[i]);
+        }
+        DiffEquationSolution ucpSolution = new DiffEquationSolution(a, b, n);
+        for (int i = 0; i <= n; i++)
+        {
+            ucpSolution.Y[i] = rpSolution.Y[i] * sysSolution[0].Y[i];
+        }
+
+        TaskSolution taskSolution;
+        taskSolution.I = sysSolution[0];
+        taskSolution.Uc = sysSolution[1];
+        taskSolution.Rp = rpSolution;
+        taskSolution.Ucp = ucpSolution;
+
+        return taskSolution;
     }
 
     private double Rp(double I)

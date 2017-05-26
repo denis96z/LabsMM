@@ -28,12 +28,13 @@ namespace Lab2
                 double le = double.Parse(tbLe.Text);
                 double uc0 = double.Parse(tbUc0.Text);
                 double i0 = double.Parse(tbI0.Text);
+                int n = int.Parse(tbN.Text);
 
                 Task task = new Task(rk, lk, ck, r, p0, ts, tw, le, uc0, i0);
-                var solutions = task.Solve();
+                var solution = task.Solve(0, 0.0006, n);
 
                 Graph graph = new Graph(zedGraph);
-                graph.DrawGraph(solutions[0], solutions[1]);
+                graph.DrawGraph(solution.I, solution.Uc, solution.Rp, solution.Ucp);
             }
             catch (Exception exception)
             {

@@ -51,6 +51,8 @@
             this.tbI0 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnSolve = new System.Windows.Forms.Button();
+            this.tbN = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // zedGraph
@@ -240,7 +242,7 @@
             // 
             // btnSolve
             // 
-            this.btnSolve.Location = new System.Drawing.Point(15, 269);
+            this.btnSolve.Location = new System.Drawing.Point(15, 295);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(127, 23);
             this.btnSolve.TabIndex = 24;
@@ -248,11 +250,30 @@
             this.btnSolve.UseVisualStyleBackColor = true;
             this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
             // 
+            // tbN
+            // 
+            this.tbN.Location = new System.Drawing.Point(42, 269);
+            this.tbN.Name = "tbN";
+            this.tbN.Size = new System.Drawing.Size(100, 20);
+            this.tbN.TabIndex = 26;
+            this.tbN.Text = "50";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(12, 272);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(18, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "N:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.tbN);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.btnSolve);
             this.Controls.Add(this.tbI0);
             this.Controls.Add(this.label10);
@@ -306,6 +327,8 @@
         private System.Windows.Forms.TextBox tbI0;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnSolve;
+        private System.Windows.Forms.TextBox tbN;
+        private System.Windows.Forms.Label label11;
     }
 }
 

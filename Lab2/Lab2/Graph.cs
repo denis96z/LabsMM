@@ -12,7 +12,8 @@ class Graph
             throw new ArgumentNullException("control");
     }
 
-    public void DrawGraph(DiffEquationSolution I, DiffEquationSolution Uc)
+    public void DrawGraph(DiffEquationSolution I, DiffEquationSolution Uc,
+        DiffEquationSolution Rp, DiffEquationSolution Ucp)
     {
         GraphPane pane = zedGraph.GraphPane;
         pane.CurveList.Clear();
@@ -30,6 +31,20 @@ class Graph
             list.Add(Uc.X[i], Uc.Y[i]);
         }
         pane.AddCurve("Uc", list, Color.Red, SymbolType.None);
+
+        /*list = new PointPairList();
+        for (int i = 0; i <= I.N; i++)
+        {
+            list.Add(Rp.X[i], Rp.Y[i]);
+        }
+        pane.AddCurve("Rp", list, Color.Black, SymbolType.None);*/
+
+        list = new PointPairList();
+        for (int i = 0; i <= I.N; i++)
+        {
+            list.Add(Ucp.X[i], Ucp.Y[i]);
+        }
+        pane.AddCurve("Ucp", list, Color.LightGreen, SymbolType.None);
 
         zedGraph.AxisChange();
         zedGraph.Invalidate();
