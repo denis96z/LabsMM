@@ -51,7 +51,7 @@ class Task
                 (x, y) => ((y[1] - (Rk + Rp(y[0]))*y[0]) / Lk),
                 (x, y) => (-y[0] / Ck)
         });
-
+        deSys.FindSolution(0, 100, new double[] { I0, Uc0 }, 1000);
     }
 
     private double Rp(double I)
