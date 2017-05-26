@@ -21,6 +21,22 @@ class Task
     NTable nTable;
     SigmaTable sigmaTable;
 
+    public Task(double rk, double lk, double ck,
+    double r, double p0, double ts, double tw,
+    double le, double uc0, double i0)
+    {
+        Rk = rk;
+        Lk = lk;
+        Ck = ck;
+        R = r;
+        P0 = p0;
+        Ts = ts;
+        Tw = tw;
+        Le = le;
+        Uc0 = uc0;
+        I0 = I0;
+    }
+
     public void Solve()
     {
         TablesManager manager = new TablesManager();

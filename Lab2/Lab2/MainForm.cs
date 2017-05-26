@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Lab2
 {
@@ -16,12 +8,9 @@ namespace Lab2
         {
             InitializeComponent();
 
-            DiffEquationSys sys = new RungeKuttaDiffEquationSys(new DiffEquationSys.SeveralArgFun[]
-            {
-                (x, y) => x,
-                (x, y) => y[1]
-            });
-            DiffEquationSolution[] solutions = sys.FindSolution(0, 1, new double[] { 1, 1 }, 100);
+            zedGraph.GraphPane.Title.Text = "График";
+            zedGraph.GraphPane.XAxis.Title.Text = "";
+            zedGraph.GraphPane.YAxis.Title.Text = "";
         }
     }
 }

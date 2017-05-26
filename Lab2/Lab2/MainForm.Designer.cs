@@ -28,12 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.zedGraph = new ZedGraph.ZedGraphControl();
+            this.SuspendLayout();
+            // 
+            // zedGraph
+            // 
+            this.zedGraph.Location = new System.Drawing.Point(198, 12);
+            this.zedGraph.Name = "zedGraph";
+            this.zedGraph.ScrollGrace = 0D;
+            this.zedGraph.ScrollMaxX = 0D;
+            this.zedGraph.ScrollMaxY = 0D;
+            this.zedGraph.ScrollMaxY2 = 0D;
+            this.zedGraph.ScrollMinX = 0D;
+            this.zedGraph.ScrollMinY = 0D;
+            this.zedGraph.ScrollMinY2 = 0D;
+            this.zedGraph.Size = new System.Drawing.Size(574, 537);
+            this.zedGraph.TabIndex = 3;
+            this.zedGraph.UseExtendedPrintDialog = true;
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.zedGraph);
+            this.Name = "MainForm";
+            this.Text = "Лабораторная работа №2";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private ZedGraph.ZedGraphControl zedGraph;
     }
 }
 
