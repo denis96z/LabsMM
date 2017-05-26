@@ -31,7 +31,8 @@ namespace Lab2
                 int n = int.Parse(tbN.Text);
 
                 Task task = new Task(rk, lk, ck, r, p0, ts, tw, le, uc0, i0);
-                var solution = task.Solve(0, 0.0006, n);
+                var solution = task.Solve(rbRungeKutta.Checked ?
+                    DiffMethod.RungeKutta : DiffMethod.ImplTrap, 0, 0.0006, n);
 
                 Graph graph = new Graph(zedGraph);
                 graph.DrawGraph(solution.I, solution.Uc, solution.Rp, solution.Ucp);

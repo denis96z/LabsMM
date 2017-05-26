@@ -120,6 +120,45 @@ class ImplTrapDiffEquationSys : DiffEquationSys
 
     public override DiffEquationSolution[] FindSolution(double a, double b, double[] y0, int n)
     {
-        throw new NotImplementedException();
+        DiffEquationSolution[] solutions = new DiffEquationSolution[f.Length];
+
+        for (int i = 0; i < f.Length; i++)
+        {
+            solutions[i] = new DiffEquationSolution(a, b, n);
+            solutions[i].Y[0] = y0[i];
+        }
+
+        double x = a;
+        double h = (b - a) / n;
+        for (int i = 1; i <= n; i++, x += h)
+        {
+            double[] yk = new double[f.Length];
+            for (int j = 0; j < f.Length; j++)
+            {
+                yk[j] = solutions[j].Y[i - 1];
+            }
+
+            double[] yk1 = new double[f.Length];
+            for (int j = 0; j < f.Length; j++)
+            {
+                yk[j] = solutions[j].Y[i - 1];
+            }
+
+            for (int j = 0; j < f.Length; j++)
+            {
+                yk1[j] = yk[j] + 0.5 * h * (f[j](x, yk) + f[j](x + h, yk1));
+            }
+            for (int j = 0; j < f.Length; j++)
+            {
+                yk1[j] = yk[j] + 0.5 * h * (f[j](x, yk) + f[j](x + h, yk1));
+            }
+
+            for (int j = 0; j < f.Length; j++)
+            {
+                solutions[j].Y[i] = yk1[j];
+            }
+        }
+
+        return solutions;
     }
 }

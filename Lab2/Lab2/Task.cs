@@ -8,6 +8,12 @@ struct TaskSolution
     public DiffEquationSolution Ucp;
 }
 
+enum DiffMethod
+{
+    RungeKutta,
+    ImplTrap
+}
+
 class Task
 {
     public double Rk { get; set; }
@@ -45,7 +51,7 @@ class Task
         I0 = I0;
     }
 
-    public TaskSolution Solve(double a, double b, int n)
+    public TaskSolution Solve(DiffMethod method, double a, double b, int n)
     {
         TablesManager manager = new TablesManager();
         t0Table = manager.T0Table;
@@ -53,11 +59,25 @@ class Task
         nTable = manager.NTable;
         sigmaTable = manager.SigmaTable;
 
-        DiffEquationSys deSys = new RungeKuttaDiffEquationSys(new DiffEquationSys.SeveralArgFun[]
+        DiffEquationSys deSys = null;
+        switch (method)
         {
-                (x, y) => ((y[1] - (Rk + Rp(y[0]))*y[0]) / Lk),
-                (x, y) => (-y[0] / Ck)
-        });
+            case DiffMethod.RungeKutta:
+                deSys = new RungeKuttaDiffEquationSys(new DiffEquationSys.SeveralArgFun[]
+                {
+                    (x, y) => ((y[1] - (Rk + Rp(y[0]))*y[0]) / Lk),
+                    (x, y) => (-y[0] / Ck)
+                });
+                break;
+
+            case DiffMethod.ImplTrap:
+                deSys = new ImplTrapDiffEquationSys(new DiffEquationSys.SeveralArgFun[]
+                {
+                    (x, y) => ((y[1] - (Rk + Rp(y[0]))*y[0]) / Lk),
+                    (x, y) => (-y[0] / Ck)
+                });
+                break;
+        }
 
         DiffEquationSolution[] sysSolution = deSys.FindSolution(a, b, new double[] { I0, Uc0 }, n);
         DiffEquationSolution rpSolution = new DiffEquationSolution(a, b, n);
@@ -82,7 +102,6 @@ class Task
 
     private double Rp(double I)
     {
-        //!!! Вроде силу тока по модулю брать надо, после тестирования будет понятно.
         I = Math.Abs(I);
 
         double T(double r)

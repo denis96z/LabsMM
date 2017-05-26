@@ -53,6 +53,8 @@
             this.btnSolve = new System.Windows.Forms.Button();
             this.tbN = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.rbRungeKutta = new System.Windows.Forms.RadioButton();
+            this.rbTrap = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // zedGraph
@@ -242,7 +244,7 @@
             // 
             // btnSolve
             // 
-            this.btnSolve.Location = new System.Drawing.Point(15, 295);
+            this.btnSolve.Location = new System.Drawing.Point(15, 341);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(127, 23);
             this.btnSolve.TabIndex = 24;
@@ -267,11 +269,36 @@
             this.label11.TabIndex = 25;
             this.label11.Text = "N:";
             // 
+            // rbRungeKutta
+            // 
+            this.rbRungeKutta.AutoSize = true;
+            this.rbRungeKutta.Checked = true;
+            this.rbRungeKutta.Location = new System.Drawing.Point(20, 295);
+            this.rbRungeKutta.Name = "rbRungeKutta";
+            this.rbRungeKutta.Size = new System.Drawing.Size(122, 17);
+            this.rbRungeKutta.TabIndex = 27;
+            this.rbRungeKutta.TabStop = true;
+            this.rbRungeKutta.Text = "Метод Рунге-Кутты";
+            this.rbRungeKutta.UseVisualStyleBackColor = true;
+            // 
+            // rbTrap
+            // 
+            this.rbTrap.AutoSize = true;
+            this.rbTrap.Location = new System.Drawing.Point(20, 318);
+            this.rbTrap.Name = "rbTrap";
+            this.rbTrap.Size = new System.Drawing.Size(122, 17);
+            this.rbTrap.TabIndex = 28;
+            this.rbTrap.TabStop = true;
+            this.rbTrap.Text = "Метод трапеций (н)";
+            this.rbTrap.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.rbTrap);
+            this.Controls.Add(this.rbRungeKutta);
             this.Controls.Add(this.tbN);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.btnSolve);
@@ -329,6 +356,8 @@
         private System.Windows.Forms.Button btnSolve;
         private System.Windows.Forms.TextBox tbN;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.RadioButton rbRungeKutta;
+        private System.Windows.Forms.RadioButton rbTrap;
     }
 }
 
