@@ -45,17 +45,19 @@ class Task
         nTable = manager.NTable;
         sigmaTable = manager.SigmaTable;
 
-        //!!! Вроде силу тока по модулю брать надо (сила тока здесь y[0]), после тестирования будет понятно.
         DiffEquationSys deSys = new RungeKuttaDiffEquationSys(new DiffEquationSys.SeveralArgFun[]
         {
                 (x, y) => ((y[1] - (Rk + Rp(y[0]))*y[0]) / Lk),
                 (x, y) => (-y[0] / Ck)
         });
-        var solution = deSys.FindSolution(0, 100, new double[] { I0, Uc0 }, 50);
+        var solution = deSys.FindSolution(0, 0.0006, new double[] { I0, Uc0 }, 50);
     }
 
     private double Rp(double I)
     {
+        //!!! Вроде силу тока по модулю брать надо, после тестирования будет понятно.
+        I = Math.Abs(I);
+
         double T(double r)
         {
             Interpolation itp = new LinearInterpolation(t0Table.I, t0Table.T0);
