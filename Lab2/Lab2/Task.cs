@@ -51,7 +51,7 @@ class Task
                 (x, y) => ((y[1] - (Rk + Rp(y[0]))*y[0]) / Lk),
                 (x, y) => (-y[0] / Ck)
         });
-        deSys.FindSolution(0, 100, new double[] { I0, Uc0 }, 1000);
+        var solution = deSys.FindSolution(0, 100, new double[] { I0, Uc0 }, 50);
     }
 
     private double Rp(double I)
@@ -71,7 +71,7 @@ class Task
         {
             Integral itgN = new SimpsonIntegral(r =>
             {
-                Interpolation2 ditp = new LinearInterpolation2(nTable.T, nTable.P, nTable.N);
+                Interpolation2 ditp = new LinearLogInterpolation2(nTable.T, nTable.P, nTable.N);
                 double n = ditp.FindValue(T(r), p);
                 return n * r;
             });
@@ -90,7 +90,7 @@ class Task
 
         Integral itgSigma = new SimpsonIntegral(r =>
         {
-            Interpolation2 ditp = new LinearInterpolation2(sigmaTable.T, sigmaTable.P, sigmaTable.Sigma);
+            Interpolation2 ditp = new LinearLogInterpolation2(sigmaTable.T, sigmaTable.P, sigmaTable.Sigma);
             double n = ditp.FindValue(T(r), pValue);
             return n * r;
         });
