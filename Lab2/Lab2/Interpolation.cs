@@ -131,19 +131,15 @@ class LinearLogInterpolation2 : Interpolation2
         int index1_Y = FirstIndex(y, yValues, Y_NODES_COUNT);
         int index2_Y = index1_Y + 1;
 
+        double r1 = zValues[index1_X, index1_Y] + (zValues[index1_X, index2_Y] - zValues[index1_X, index1_Y]) *
+            ((y - yValues[index1_Y]) / (yValues[index2_Y] - yValues[index1_Y]));
+        double r2 = zValues[index2_X, index1_Y] + (zValues[index2_X, index2_Y] - zValues[index2_X, index1_Y]) *
+            ((y - yValues[index1_Y]) / (yValues[index2_Y] - yValues[index1_Y]));
 
-        double r1 = (xValues[index2_X] - x) / (xValues[index2_X] - xValues[index1_X]) * Math.Log(zValues[index1_X, index1_Y]) +
-        	(x - xValues[index1_X]) / (xValues[index2_X] - xValues[index1_X]) * Math.Log(zValues[index2_X, index1_Y]);
+        double r = Math.Log(r1) + (Math.Log(r2) - Math.Log(r1)) *
+            ((x - xValues[index1_X]) / (xValues[index2_X] - xValues[index1_X]));
 
-
-		double r2 = (xValues[index2_X] - x) / (xValues[index2_X] - xValues[index1_X]) * Math.Log(zValues[index1_X, index2_Y]) +
-        	(x - xValues[index1_X]) / (xValues[index2_X] - xValues[index1_X]) * Math.Log(zValues[index2_X, index2_Y]);
-        	
-
-        double result = (yValues[index2_Y] - y) / (yValues[index2_Y] - yValues[index1_Y]) * Math.Exp(r1) +
-        	(y - yValues[index1_Y]) / (yValues[index2_Y] - yValues[index1_Y]) * Math.Exp(r2);
-
-        return result;
+        return Math.Exp(r);
     }
 
     private int FirstIndex(double value, double[] conteiner, int nodesCount)
