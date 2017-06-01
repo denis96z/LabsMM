@@ -6,13 +6,12 @@ class TridiagonalMatrixAlgorithm
     public TridiagonalMatrixAlgorithm() { }
 
     /// <summary>
-    /// Находит вектор решений системы уравнений с трехдиагональной матрицей коэффициентов.
+    /// Находит вектор решений системы уравнений с трехдиагональной матрицей коэффициентов. AXn-1 + BXn + CXn+1 = F
     /// </summary>
     /// <param name="a">Массив коэффициентов A. Имеет размер N + 1. Нулевой и N-й элементы = 0.</param>
     /// <param name="b">Массив коэффициентов B. Имеет размер N + 1. Нулевой и N-й элементы = 0.</param>
     /// <param name="c">Массив коэффициентов C. Имеет размер N + 1. Нулевой и N-й элементы = 0.</param>
     /// <param name="f">Массив коэффициентов F. Имеет размер N + 1. Нулевой и N-й элементы = 0.</param>
-
     /// <returns>Вектор решений системы.</returns>
     public double[] ApplyTo(double[] a, double[] b, double[] c, double[] f,
         double k0, double kn, double m0, double mn, double p0, double pn, int n)

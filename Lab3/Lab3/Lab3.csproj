@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EEA66F66-213B-4AE8-B269-BC5DF3909B16}</ProjectGuid>
+    <ProjectGuid>{03560579-735D-46CA-9B76-68824A38ECEE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Lab4</RootNamespace>
-    <AssemblyName>Lab4</AssemblyName>
+    <RootNamespace>Lab3</RootNamespace>
+    <AssemblyName>Lab3</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,7 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interpolation.cs" />
+    <Compile Include="DifferencialEquation.cs" />
+    <Compile Include="GraphManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
