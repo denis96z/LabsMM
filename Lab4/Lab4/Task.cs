@@ -48,8 +48,20 @@ class Task
         throw new NotImplementedException();
     }
 
-    public double k(double T)
+    public double C(double T)
     {
         return new LinearInterpolation(table.T, table.C).FindValue(T);
+    }
+
+    public double k(double T)
+    {
+        return new LinearInterpolation(table.T, table.K).FindValue(T);
+    }
+
+    private double alfa(double x)
+    {
+        double b = (AlfaN * L) / (AlfaN - Alfa0);
+        double a = -Alfa0 * b;
+        return a / (x - b);
     }
 }
