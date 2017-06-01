@@ -28,6 +28,8 @@ class Task
     public double N { get; set; }
     public double M { get; set; }
 
+    public Table table;
+
     public Task(double l, double r, double tenv, double f0,
         double alfa0, double alfan)
     {
@@ -37,6 +39,8 @@ class Task
         F0 = f0;
         Alfa0 = alfa0;
         AlfaN = alfan;
+
+        table = new TableManager().LoadTable();
     }
 
     public Solution Solve()
@@ -46,6 +50,6 @@ class Task
 
     public double k(double T)
     {
-
+        return new LinearInterpolation(table.T, table.C).FindValue(T);
     }
 }
