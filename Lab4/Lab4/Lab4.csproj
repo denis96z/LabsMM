@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableManager.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="TridiagonalMatrixAlgorithm.cs" />
     <EmbeddedResource Include="MainForm.resx">

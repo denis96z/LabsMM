@@ -19,7 +19,8 @@ namespace Lab4
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            Task task = new Task(1, 1, 1, 1, 1, 1);
+            task.Solve();
         }
     }
 }
